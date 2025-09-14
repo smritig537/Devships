@@ -1,5 +1,5 @@
-﻿# Devshipss Project
-Devshipss - A Friendly Platform for Developers
+﻿# Devships Project
+Devships - A Friendly Platform for Developers
 Overview
 Devships is a unique platform designed to connect developers for collaboration, networking, and project opportunities, inspired by the swipe-based mechanics of Tinder. It enables developers to showcase their skills, match with like-minded professionals, and build meaningful professional relationships. The backend is built with Node.js, Express, and MongoDB, utilizing schemas for robust data management, while the frontend is developed using React with Vite for a fast and modern user experience.
 Features
@@ -98,3 +98,4 @@ License
 This project is licensed under the MIT License.
 Contact
 For inquiries or feedback, reach out via smritig537@gmail.com or open an issue on the repository.
+
