@@ -9,32 +9,31 @@ const jwt = require
 
 const authRouter = express.Router();
 
-//signup Api
-authRouter.post('/signup', async (req,res)=>{
-// const user = new User(req.body);
-validateSignupDate(req);
-try{
+// signup API
+authRouter.post('/signup', async (req, res) => {
+    validateSignupDate(req);
+    try {
+        const { name, email, password, Skills } = req.body;  // <-- include Skills here
 
-    const {name, email, password} = req.body;
+        // encrypt the password
+        const poweredPassword = await bcrypt.hash(password, 10);
 
-    //encrypting the password
-    const poweredPassword = await bcrypt.hash(password, 10);
-    console.log(poweredPassword);
+        // create user (spread req.body, but overwrite password & handle Skills safely)
+        const user = new User({
+            ...req.body,
+            password: poweredPassword,
+            Skills: Array.isArray(Skills) ? Skills : []   // <-- FIX ✅
+        });
 
-const user = new User({
-    name,
-    email,
-    password: poweredPassword  //this  will show the hashed password 
+        await user.save();
+        res.status(201).send("User added successfully");
+    } catch (e) {
+        console.error("Signup error:", e);
+        res.status(400).send("Not added the user");
+    }
 });
-    
-await user.save();
-res.send("User added succesfully");
-}
-catch(e){
-    console.log(e);
-    res.status(400).send("Not added the user: ");
-}
-})
+
+
 
 //Login Api
 authRouter.post('/login', async (req, res) => {
