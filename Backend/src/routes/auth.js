@@ -84,10 +84,10 @@ authRouter.post('/login', async (req, res) => {
     }
 });
 
-authRouter.get('/logout', async(req,res)=>{
+authRouter.post('/logout', async(req,res)=>{
     // res.clearCookie('token');
     // res.send("Logout successful");
-    res.cookie("token",null,{expires: new Date(Date.now()),httpOnly:true,secure:false,sameSite:"lax"});
+    res.cookie("token",null,{expires: new Date(Date.now())});
     res.send("Logout successful");
     console.log("Logout successful");
 }   );

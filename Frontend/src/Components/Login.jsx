@@ -9,10 +9,12 @@ import {Base_Url} from '../utils/Constants';
 const Login = () => {
   const [email, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
   const Dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogin = async (e) => {
-    e.preventDefault(); // prevents page reload
+    e.preventDefault(); // Prevents page reload
+    setError(null); // prevents page reload
     try {
       const res = await axios.post(
         Base_Url + '/login',
@@ -23,7 +25,18 @@ const Login = () => {
       Dispatch(addUser(res.data));
       return navigate('/');
     } catch (error) {
-      console.log('error', error);
+       console.error('Login error details:', {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+      });
+      if (error.response?.status === 401) {
+        setError('Login failed: Invalid Credentials');
+      } else if (error.response?.status === 404) {
+        setError(`Login failed: User not found`);
+      } else{
+        setError(`Login failed: ${error.message}.`);
+      }
     }
   };
 
@@ -32,6 +45,11 @@ const Login = () => {
       <div className="card card-dash bg-base-100 w-96">
         <div className="card-body">
           <h1 className="card-title justify-center">Login</h1>
+           {error && (
+            <div className="alert alert-error mt-2">
+              <span>{error}</span>
+            </div>
+          )}
           <form onSubmit={handleLogin} className="flex flex-col">
             <label className="form-control w-full max-w-xs py-2 my-2">
               <span className="label-text">Email ID</span>

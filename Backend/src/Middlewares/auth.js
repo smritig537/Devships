@@ -5,7 +5,7 @@ const authUser = async (req, res, next) => {
     const { token } = req.cookies;
 
     if (!token) {
-        return res.status(401).send("Token not valid");
+        return res.status(401).send("Please Login!");
     }
 
     try {
