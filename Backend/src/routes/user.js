@@ -3,7 +3,7 @@ const userRouter = express.Router();
 const  authUser   = require('../Middlewares/auth');
 const ConnectionRequest = require('../models/connectionRequests');
 const User = require('../models/User');
-const USER_SAFE_DATA = ['name', 'email', 'id', 'image', 'age', 'gender', 'about'];
+const USER_SAFE_DATA = ['name', 'email', 'id', 'image', 'age', 'gender', 'about','photo_url','Skills'];
 
 //Get all th epending connection request for the loggedIn user
 userRouter.get('/user/requests/recieved', authUser, async (req, res) => {
@@ -15,7 +15,7 @@ userRouter.get('/user/requests/recieved', authUser, async (req, res) => {
     const connectionRequests = await ConnectionRequest.find({
       toUserId: loggedInUserId._id, 
       status: "interested",
-    }).populate("fromUserId",USER_SAFE_DATA);
+    }).populate("fromUserId",USER_SAFE_DATA + "photo_url Skills");
 
     res.json({
       message: "Data fetched Successfully",

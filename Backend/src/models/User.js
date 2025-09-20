@@ -37,7 +37,7 @@ const UserSchema = new mongoose.Schema({
     },
     about:{
         type: String,
-        default: "I am a user",
+        default: "I am a user of Devship",
     },
     age:{
         type: Number,
@@ -64,7 +64,6 @@ const UserSchema = new mongoose.Schema({
                 throw new Error('Invalid Photo URL: ' + value);
             }
         },
-        default: null // Optional: set to null or a default placeholder URL
     },
     Skills: {
         type: Array,

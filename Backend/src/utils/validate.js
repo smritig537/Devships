@@ -14,7 +14,7 @@ validateSignupDate = (req) =>{
 
 }
 const validateProfileEditData = (req) => {
-    const allowedEditFields = ["name", "about", "age", "gender"];
+    const allowedEditFields = ["name", "about", "age", "gender","photo_url","Skills"];
     const keys = Object.keys(req.body);
 
     if (keys.length === 0) {

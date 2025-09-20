@@ -41,7 +41,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center my-10">
+    <div className="flex justify-center items-center my-20">
       <div className="card card-dash bg-base-100 w-96">
         <div className="card-body">
           <h1 className="card-title justify-center">Login</h1>
