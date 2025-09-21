@@ -81,7 +81,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                   <li>
-                  <Link to="/Requests" className="justify-between">
+                  <Link to="/requests" className="justify-between">
                     Requests
                   </Link>
                 </li>

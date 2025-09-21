@@ -93,50 +93,63 @@ requestRouter.patch('/update', async(req , res)=>{
 })
 
 // Accept a connection request
+// requestRouter.js
 requestRouter.post('/request/send/interested/:toUserId', authUser, async (req, res) => {
-    try {
-        const fromUserId = req.user._id;
-        const toUserId = req.params.toUserId;
-        const { status } = req.body;
+  try {
+    const fromUserId = req.user._id; // Sender (e.g., User A)
+    const toUserId = req.params.toUserId; // Recipient (e.g., User B)
+    const { status } = req.body;
 
-        if (!status) {
-            return res.status(400).json({ error: "Status is required in request body" });
-        }
-
-        const allowedStatus = ["ignored", "interested"];
-        if (!allowedStatus.includes(status)) {
-            return res.status(400).json({ error: "Invalid status" });
-        }
-
-        // Check if a request already exists in either direction
-        const existingRequest = await ConnectionRequest.findOne({
-            $or: [
-                { fromUserId, toUserId },
-                { fromUserId: toUserId, toUserId: fromUserId }
-            ]
-        });
-
-        if (existingRequest) {
-            return res.status(400).json({ error: "Connection request already exists" });
-        }
-
-        const newRequest = new ConnectionRequest({
-            fromUserId,
-            toUserId,
-            status
-        });
-
-        const data = await newRequest.save();
-
-        res.json({
-            message: "Connection request sent successfully",
-            data
-        });
-
-    } catch (e) {
-        console.error("Error sending connection request:", e.message);
-        res.status(400).json({ error: "Failed to send connection request" });
+    if (!status) {
+      return res.status(400).json({ error: 'Status is required in request body' });
     }
+
+    const allowedStatus = ['interested', 'ignored'];
+    if (!allowedStatus.includes(status)) {
+      return res.status(400).json({ error: `Invalid status. Must be one of: ${allowedStatus.join(', ')}` });
+    }
+
+    // Check if users exist
+    const fromUser = await User.findById(fromUserId);
+    const toUser = await User.findById(toUserId);
+    if (!fromUser || !toUser) {
+      return res.status(404).json({ error: 'One or both users not found' });
+    }
+
+    // Prevent self-requests
+    if (fromUserId.toString() === toUserId.toString()) {
+      return res.status(400).json({ error: 'Cannot send request to self' });
+    }
+
+    // Check for existing requests in either direction
+    const existingRequest = await ConnectionRequest.findOne({
+      $or: [
+        { fromUserId, toUserId },
+        { fromUserId: toUserId, toUserId: fromUserId },
+      ],
+    });
+
+    if (existingRequest) {
+      return res.status(400).json({ error: 'Connection request already exists' });
+    }
+
+    const newRequest = new ConnectionRequest({
+      fromUserId,
+      toUserId,
+      status,
+    });
+
+    const data = await newRequest.save();
+    console.log('Saved ConnectionRequest:', data);
+
+    res.json({
+      message: 'Connection request sent successfully',
+      data,
+    });
+  } catch (error) {
+    console.error('Error sending connection request:', error.message);
+    res.status(500).json({ error: 'Failed to send connection request' });
+  }
 });
 
 // Add to requestRouter.js
