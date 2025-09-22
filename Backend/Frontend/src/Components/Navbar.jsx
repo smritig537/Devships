@@ -98,7 +98,7 @@ const Navbar = () => {
           ) : (
             <div className="flex gap-2">
               <Link to="/login" className="btn btn-ghost text-sm md:text-base">
-                Login
+                Login/Signup
               </Link>
             </div>
           )}
