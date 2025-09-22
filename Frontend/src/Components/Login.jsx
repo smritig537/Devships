@@ -62,6 +62,7 @@ const Login = () => {
         about,
         Skills
       },{withCredentials:true});
+      console.log(res.data);
       Dispatch(addUser(res.data));
       return navigate('/profile');
 
