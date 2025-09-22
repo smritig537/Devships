@@ -41,7 +41,10 @@ const Login = () => {
         setError('Login failed: Invalid Credentials');
       } else if (error.response?.status === 404) {
         setError(`Login failed: User not found`);
-      } else{
+      } else if( error.response?.status === 400){
+        setError(`Login failed: Enter values`); 
+      }
+      else{
         setError(`Login failed: ${error.message}.`);
       }
     }
