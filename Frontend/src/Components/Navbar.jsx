@@ -54,11 +54,11 @@ const Navbar = () => {
             DevShips
           </Link>
         </div>
-        <div className="flex gap-2 items-center px-4">
-          {user && (
+         <div className="flex gap-2 items-center px-4">
+          {user ? (
             <div className="dropdown dropdown-end mx-5 flex">
               <p className="px-4">Welcome {user.name}</p>
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar ">
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full md:w-8 sm:w-8">
                   <img
                     alt="User Photo"
@@ -75,12 +75,12 @@ const Navbar = () => {
                     Profile
                   </Link>
                 </li>
-                  <li>
+                <li>
                   <Link to="/connections" className="justify-between">
                     Connections
                   </Link>
                 </li>
-                  <li>
+                <li>
                   <Link to="/requests" className="justify-between">
                     Requests
                   </Link>
@@ -94,6 +94,12 @@ const Navbar = () => {
                   </a>
                 </li>
               </ul>
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <Link to="/login" className="btn btn-ghost text-sm md:text-base">
+                Login
+              </Link>
             </div>
           )}
         </div>
