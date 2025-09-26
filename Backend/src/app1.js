@@ -15,7 +15,7 @@ const cors = require('cors');
 
 app.use(
 cors({
-        origin:"http://localhost:5173",
+        origin:["http://localhost:5173","https://devships-tbn4.vercel.app/"],
         credentials:true,
     })
 );
@@ -34,5 +34,5 @@ app.use('/', userRouter);
 
 
 app.listen(5000, ()=>{
-    console.log("Server is running on port 5000");
+    console.log("Server is running on port");
 })

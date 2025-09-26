@@ -15,7 +15,7 @@ const cors = require('cors');
 
 app.use(
 cors({
-        origin:"https://devships-tbn4-ebrand7p8-smritig537s-projects.vercel.app/",
+        origin:"https://devships-tbn4.vercel.app",
         credentials:true,
     })
 );
