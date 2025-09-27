@@ -13,26 +13,37 @@ const requestRouter = require('./routes/requests');
 const userRouter = require('./routes/user');
 const cors = require('cors');
 
+const allowedOrigins = ['http://localhost:5173', 'https://devships.vercel.app'];
+
 app.use(
-cors({
-        origin:["http://localhost:5173","https://devships-tbn4.vercel.app/"],
-        credentials:true,
-    })
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, origin);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
 );
 
+// Handle preflight requests
+app.options('*', cors());
 
-
-app.use(express.json()); //agar mai express.json use nahi karti toh mere mongodb compass mai data blank save hota because its a middleware through which the body is going from postman and getting saved.
-
-app.use(cookieParser()); //for reading cookies tokens
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use('/', authRouter);
 app.use('/', profileRouter);
 app.use('/', requestRouter);
 app.use('/', userRouter);
 
+app.listen(5000, () => {
+  console.log('Server is running on port 5000');
+});
 
-
-app.listen(5000, ()=>{
-    console.log("Server is running on port");
-})
+module.exports = app;
