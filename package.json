@@ -1,0 +1,15 @@
+{
+"name": "devships-monorepo",
+"version": "1.0.0",
+"description": "Devships full-stack application",
+"main": "Backend/app1.js",
+"scripts": {
+"install-all": "npm install --prefix Frontend && npm install --prefix backend",
+"build-client": "npm run build --prefix Frontend",
+"start-server": "node Backend/src/app1.js",
+"render-deploy": "npm run build-client && npm run start-server"
+},
+"keywords": [],
+"author": "",
+"license": "ISC"
+}

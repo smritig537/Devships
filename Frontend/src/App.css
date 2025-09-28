@@ -1,0 +1,174 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background-color: #242424;
+}
+
+h1 {
+  font-size: clamp(1.5em, 4vw, 2.5em);
+  line-height: 1.1;
+  text-align: center;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.upload-button{
+  background-color: #2F2F2F2F;
+}
+
+.tag-button{
+  background-color: #8FA9FF;
+}
+
+.generate-button{
+  background-color: #0296E0;
+}
+
+/* Ensure modal is responsive */
+.fixed.inset-0 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.max-w-md {
+  max-width: min(90vw, 500px); /* Limit modal width on smaller screens */
+}
+
+/* Main content container */
+.min-h-screen {
+  width: 100vw;
+  max-width: 100%; /* Prevent overflow */
+  overflow-x: hidden;
+}
+
+/* AssessmentDashboard container */
+.bg-\[\#252525\] {
+  width: 100%;
+  max-width: 100vw; /* Ensure it doesn’t exceed viewport */
+  margin: 0 auto;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  box-sizing: border-box;
+}
+
+/* enabled state: bg-[#0296E0] hover:bg-[#0280C7] */
+.export-button {
+  background-color: #0296E0;
+  border: none;
+  border-radius: 0.5rem;     /* ~rounded-xl */
+  padding: 0.5rem 1rem;      /* ~py-2 px-4 */
+  font-weight: 600;          /* ~font-semibold */
+  transition: background-color 150ms ease, box-shadow 150ms ease;
+  cursor: pointer;
+}
+
+.choose-button{
+  background-color: #0296E0;
+}
+.cancel-button{
+  background-color: #0296E0;
+}
+
+.bell-button{
+  background-color: #0D0D0D;
+}
+
+.export-button:hover {
+  background-color: #0280C7; /* hover:bg-[#0280C7] */
+}
+
+/* disabled state: bg-gray-500 cursor-not-allowed */
+.export-button:disabled,
+.export-button.is-disabled {
+  background-color: #6B7280; /* Tailwind gray-500 */
+  cursor: not-allowed;       /* cursor-not-allowed */
+  opacity: 0.7;
+}
+
+/* prevent hover color when disabled */
+.export-button:disabled:hover,
+.export-button.is-disabled:hover {
+  background-color: #6B7280;
+}
+
+.hint-button{
+  background-color: #1A1A1A;
+}
+.ans-button{
+  background-color: #1A1A1A;
+}
+
+/* Responsive layout for AssessmentDashboard */
+@media (max-width: 1024px) {
+  .lg\:flex-row {
+    flex-direction: column; /* Stack vertically on smaller laptops */
+  }
+  .lg\:w-\[381px\] {
+    width: 100%; /* Full width for form on smaller screens */
+    max-width: none;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 0.5rem;
+  }
+  h1 {
+    font-size: clamp(1.2em, 3.5vw, 2em);
+  }
+  .bg-\[\#252525\] {
+    padding: 1rem;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
