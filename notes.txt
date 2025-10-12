@@ -1,0 +1,15 @@
+# Deployment
+
+- Signup on AWS
+- Launch instance
+- chmod 400 <secret>.pem
+- ssh -i "DevShips.pem" ubuntu@ec2-3-110-219-18.ap-south-1.compute.amazonaws.com
+- Install Node version 
+- Frontend
+    - npm install --> dependencies install
+    - npm run build
+    - sudo apt install nginx
+    - sudo systemctl start nginx
+    - sudo systemctl enable nginx
+    - cd /var/www/html
+    - enable port 80: in my port
