@@ -50,9 +50,12 @@ const Login = () => {
     }
   };
 
-  const handleSignup = async() =>{
-    try{
-      const res = axios.post(Base_Url + '/signup',{
+const handleSignup = async (e) => {
+  e.preventDefault(); // Add this for consistency
+  try {
+    const res = await axios.post(   
+      Base_Url + '/signup',
+      {
         email,
         password,
         name,
@@ -60,16 +63,24 @@ const Login = () => {
         gender,
         photo_url,
         about,
-        Skills
-      },{withCredentials:true});
-      console.log(res.data);
-      Dispatch(addUser(res.data));
-      return navigate('/profile');
+        Skills,
+      },
+      { withCredentials: true }
+    );
 
-    }catch(error){
+    console.log(res.data);
+    Dispatch(addUser(res.data));
+    navigate('/profile'); // No need to return
+  } catch (error) {
+    console.error('Signup error details:', {
+      message: error.message,
+      status: error.response?.status,
+      data: error.response?.data,
+    });
     setError(error?.response?.data || 'Failed to signup. Please try again.');
-    }
   }
+};
+
 
 
   return (
