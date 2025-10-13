@@ -2,7 +2,7 @@ const mongoose = require ('mongoose');
 
 const connectDB = async() =>{
   await mongoose.connect(
-   "mongodb+srv://smritig537db_User:Smritijeet%400723@cluster0.tvudfqp.mongodb.net"
+   "mongodb://localhost:27017/namaste_node"
   );
 }
 
