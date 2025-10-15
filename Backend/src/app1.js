@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const authUser = require('./Middlewares/auth');
 const authRouter = require('./routes/auth');
-const profileRouter = require('./routes/profile');
+const profileRouter = require('./Middlewares/profile');
 const requestRouter = require('./routes/requests');
 const userRouter = require('./routes/user');
 const cors = require('cors');
@@ -54,6 +54,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// API Routes
+app.use('/', authRouter);
+app.use('/', profileRouter);
+app.use('/', requestRouter);
+app.use('/', userRouter);
+
 // --- PRODUCTION STATIC FILE SERVING LOGIC (CRUCIAL) ---
 // This tells Express to serve the built React files when the app is running on the cloud.
 if (process.env.NODE_ENV === 'production') {
@@ -67,11 +73,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 // -----------------------------------------------------
 
-// API Routes
-app.use('/', authRouter);
-app.use('/', profileRouter);
-app.use('/', requestRouter);
-app.use('/', userRouter);
+
 
 // Use process.env.PORT for dynamic cloud hosting ports, fallback to 5000
 const PORT = process.env.PORT || 5000;

@@ -4,7 +4,7 @@ const User = require('../models/User');
 require('../config/database');
 const { validateProfileEditData } = require('../utils/validate');
 
-const authUser = require('../Middlewares/auth');
+const authUser = require('./auth');
 
 const app = express();
 
