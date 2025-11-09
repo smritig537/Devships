@@ -69,7 +69,7 @@ const handleSignup = async (e) => {
     );
 
     console.log(res.data);
-    Dispatch(addUser(res.data));
+    Dispatch(addUser(res.data.data));
     navigate('/profile'); // No need to return
   } catch (error) {
     console.error('Signup error details:', {

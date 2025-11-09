@@ -2,3 +2,5 @@ node_modules/
 Backend/node_modules/
 frontend/node_modules/
 .vercel
+Backend/src/app1.js
+Frontend/src/utils/Constants.js
