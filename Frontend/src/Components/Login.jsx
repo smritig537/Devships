@@ -68,7 +68,7 @@ const handleSignup = async (e) => {
       { withCredentials: true }
     );
 
-    console.log(res.data);
+    console.log(res.data.data);
     Dispatch(addUser(res.data.data));
     navigate('/profile'); // No need to return
   } catch (error) {
